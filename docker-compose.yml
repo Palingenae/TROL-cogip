@@ -1,0 +1,31 @@
+services:
+  db:
+    image: mysql:9.2.0
+    restart: on-failure
+    ports:
+      - '3306:3306'
+    env_file:
+      - .env
+  nginx:
+    image: nginx:1.27.3-alpine
+    restart: on-failure
+    volumes:
+      - './app/api/public:/usr/src/public'
+      - './docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro'
+    depends_on:
+      - php
+    ports:
+      - '127.0.0.1:80:80'
+  php:
+    hostname: "cogip-api"
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - './app/api:/usr/src'
+    restart: on-failure
+    env_file:
+      - .env
+    depends_on:
+      - db
+    user: 1000:1000
