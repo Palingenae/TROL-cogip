@@ -1,0 +1,21 @@
+.display {
+  font-size: 4rem;
+  font-variation-settings: 'wght' 900;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 3.75rem;
+  font-variation-settings: 'wght' 900;
+  font-weight: 900;
+  &.--companyName {
+    text-transform: uppercase;
+  }
+}
+
+h2 {
+  font-size: 4rem;
+  font-variation-settings: 'wght' 900;
+  font-weight: 900;
+}
