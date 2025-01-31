@@ -1,5 +1,6 @@
 :root {
   --font-main: Inter;
+  --font-size-ui: 1.25rem;
 
   --color-main: rgb(249, 222, 78);
   --color-alt: rgb(150, 152, 214);
@@ -18,4 +19,17 @@
   --neutral-100: #eceff2;
   --neutral-50: #f8f9fa;
   --neutral-0: #F1F2F3;
+
+  --spacing-25: 0.25rem;
+  --spacing-50: 0.5rem;
+  --spacing-100: 1rem;
+  --spacing-150: 1.5rem;
+  --spacing-200: 2rem;
+  --spacing-300: 3rem;
+  --spacing-400: 4rem;
+  --spacing-600: 6rem;
+  --spacing-800: 8rem;
+  --spacing-1600: 16rem;
+  --spacing-2400: 24rem;
+  --spacing-3200: 32rem;
 }
