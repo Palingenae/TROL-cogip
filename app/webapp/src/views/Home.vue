@@ -4,6 +4,6 @@
 
 <template>
   <section>
-    <h1 class="display">Manage your customers and your invoices easily</h1>
+    <h1 class="--display">Manage your customers and your invoices easily</h1>
   </section>
 </template>
