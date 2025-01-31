@@ -1,19 +1,15 @@
 <?php
     namespace App\Controller;
 
-use App\Controller\CircularReferenceHandlers\CompanyCircularReferenceHandler;
-use App\Controller\CircularReferenceHandlers\ContactCircularReferenceHandler;
-use App\Controller\CircularReferenceHandlers\InvoiceCircularReferenceHandler;
-    use App\Entity\Company;
-    use App\Entity\Invoice;
-    use App\Entity\Type;
+    use App\Controller\CircularReferenceHandlers\CompanyCircularReferenceHandler;
+    use App\Controller\CircularReferenceHandlers\ContactCircularReferenceHandler;
+    use App\Controller\CircularReferenceHandlers\InvoiceCircularReferenceHandler;
     use App\Repository\ContactRepository;
     use App\Repository\InvoiceRepository;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\Routing\Attribute\Route;
     use Symfony\Component\Serializer\Encoder\JsonEncoder;
-    use Symfony\Component\Serializer\Exception\CircularReferenceException;
     use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
     use Symfony\Component\Serializer\SerializerInterface;
 
@@ -29,8 +25,8 @@ use App\Controller\CircularReferenceHandlers\InvoiceCircularReferenceHandler;
                 throw $this->createNotFoundException('Invoices table is empty or not found !');
             }
 
-            $json = $serializer->serialize($invoices, JsonEncoder::FORMAT, InvoiceCircularReferenceHandler::getContext());
-            return new JsonResponse($json);
+            $json = $serializer->serialize($invoices, JsonEncoder::FORMAT, [AbstractNormalizer::ATTRIBUTES => ['ref', 'company' => ['name'], 'created_at']]);
+            return JsonResponse::fromJsonString($json);
         }
 
         #[Route('/contacts/{nRequests}', name: 'contacts', methods: ['GET'])]
