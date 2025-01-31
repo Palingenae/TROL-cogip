@@ -6,8 +6,20 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home,
+    },
+    {
+      path: '/invoices',
+      name: 'Invoices'
+    },
+    {
+      path: '/companies',
+      name: 'Companies',
+    },
+    {
+      path: '/contacts',
+      name: 'Contacts',
     }
   ],
 })

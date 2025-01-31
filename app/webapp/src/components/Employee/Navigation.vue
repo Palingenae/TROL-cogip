@@ -1,32 +1,32 @@
 <script setup lang="ts">
+import NavLink from "@/components/Employee/NavLink.vue";
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 </script>
 
 <template>
-  <nav class="navigation">
+  <div class="navigation">
     <div class="navigation__routes">
       <div class="navigation__logo">
-        <a href="/" class="navigation__logo__link">COGIP</a>
+        <span class="navigation__logo">COGIP</span>
       </div>
-      <div class="navigation__nav">
-          <a href="/" class="navigation__nav__link">Home</a>
-          <a href="/" class="navigation__nav__link --active">Invoices</a>
-          <a href="/" class="navigation__nav__link">Companies</a>
-          <a href="/" class="navigation__nav__link">Contact</a>
-      </div>
+      <nav class="navigation__nav">
+        <NavLink v-for="(route, index) in router.options.routes" v-bind:key="index" v-bind:route="route.path">{{ route.name }}</NavLink>
+      </nav>
     </div>
     <div class="navigation__userAccess">
 <!--      <a class="navigation__userAccess__link">Contact</a>-->
       <a class="navigation__userAccess__link">Sign in</a>
     </div>
-  </nav>
-  <div class="navigation-mobile">
-      <div class="navigation-mobile__logo">
-        <a href="/" class="navigation__logo__link">COGIP</a>
-      </div>
-      <button class="navigation-mobile__drawerToggle">
-      </button>
   </div>
+<!--  <div class="navigation-mobile">-->
+<!--      <div class="navigation-mobile__logo">-->
+<!--        <a href="/app/webapp/public" class="navigation__logo__link">COGIP</a>-->
+<!--      </div>-->
+<!--      <button class="navigation-mobile__drawerToggle">-->
+<!--      </button>-->
+<!--  </div>-->
 <!--  <nav class="navigation-mobile__drawer">-->
 <!--    <div class="navigation-mobile__nav">-->
 <!--      <a href="/" class="navigation-mobile__nav__link">Home</a>-->
@@ -39,21 +39,25 @@
 <!--      <a class="navigation-mobile__userAccess__link">Sign in</a>-->
 <!--    </div>-->
 <!--  </nav>-->
-
 </template>
 
 <style lang="scss" scoped>
-@use "../assets/styles/modules/breakpoints";
+@use "../../assets/styles/modules/breakpoints";
 
 .navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-800) var(--spacing-1600) var(--spacing-200);
+  padding: var(--spacing-800) var(--spacing-800) var(--spacing-200);
+
+  @include breakpoints.xxl {
+    padding: var(--spacing-800) var(--spacing-1600) var(--spacing-200);
+  }
 
   @include breakpoints.lg {
     padding: var(--spacing-800) var(--spacing-400) var(--spacing-200);
   }
+
   @include breakpoints.md {
     display: none;
   }
@@ -63,17 +67,14 @@
     align-items: center;
   }
   &__logo {
-    &__link {
-      text-decoration: none;
-      font-size: 3rem;
-      font-weight: 900;
-      font-variation-settings: 'wght' 900;
-      color: inherit;
-    }
+    font-size: 3rem;
+    font-weight: 900;
+    font-variation-settings: 'wght' 900;
+    color: inherit;
   }
   &__nav {
     display: flex;
-    gap: var(--spacing-200);
+    gap: var(--spacing-100);
     &__link {
       text-decoration: none;
       color: inherit;

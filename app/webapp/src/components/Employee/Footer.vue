@@ -1,43 +1,44 @@
 <script lang="ts" setup>
 import { MapPin, Phone, Printer, Facebook, Twitter, Linkedin, Instagram, Rss } from 'lucide-vue-next';
+import NavLink from "@/components/Employee/NavLink.vue";
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+router.options.routes.push(    {
+  path: '/privacy',
+  name: 'Privacy Policy',
+});
 </script>
 
 <template>
   <footer class="footer">
-    <hr class="footer_hr"/>
-    <div class="footer_main">
-      <h3 class="footer_main_title">COGIP</h3>
-      <div class="footer_main_head">
-        <p><MapPin /> 345 Faulconer Drive, Suite 4 • Charlottesville, CA, 12345</p>
-        <p class="footer_main_head-number">
+    <hr class="footer__separator --colored"/>
+    <div class="footer__main">
+      <h3 class="footer__main_title">COGIP</h3>
+      <div class="footer__main_head">
+        <div><MapPin /> 345 Faulconer Drive, Suite 4 • Charlottesville, CA, 12345</div>
+        <div class="footer__main_head-number">
           <span><Phone />(123) 456-7890</span>
           <span><Printer />(123) 456-7890</span>
-        </p>
+        </div>
         <!-- missing icon form google+ and Pinterest will be removed form the footer after Front-team decision -->
-        <p class="footer_main_body footer_main_body-social"> Social Media <Facebook /> <Twitter /> <Linkedin />  <Instagram /> <Rss /></p>
+        <div class="footer_main_body footer_main_body-social"> Social Media <Facebook /> <Twitter /> <Linkedin />  <Instagram /> <Rss /></div>
       </div>
     </div>
-    <hr/>
-    <nav class="footer_nav">
-      <div class="footer_nav-items">
-        <a href="/" class="footer_nav-items-link">home</a>
-        <a href="/invoices" class="footer_nav-items-link">invoices</a>
-        <a href="/compagnies" class="footer_nav-items-link">compagnies</a>
-        <a href="/contacts" class="footer_nav-items-link">contacts</a>
-        <a href="/privacy-policy" class="footer_nav-items-link">privacy policy</a>
-      </div>
-      <h5 class="footer_nav-copyright">Copyright © 2022 • COGIP Inc.</h5>
-    </nav>
+    <hr class="footer__separator"/>
+    <div class="footer__bottom">
+      <nav class="footer__nav">
+        <NavLink v-bind:route="route.path.toString()" v-for="(route, index) in router.options.routes" :key="index">{{ route.name }}</NavLink>
+      </nav>
+      <h5 class="footer__copyright">Copyright &copy; {{new Date().getFullYear()}} • COGIP Inc.</h5>
+    </div>
   </footer>
 </template>
 
 <style lang="scss" scoped>
-
-hr {
-  margin: 2rem 0;
-  border: 1px solid var(--neutral-200);
-}
+@use "../../assets/styles/modules/breakpoints";
 
 svg.lucide {
   color: var(--color-main);
@@ -47,18 +48,33 @@ svg.lucide {
 }
 
 .footer {
-  padding: 0 8rem;
+  padding: var(--spacing-800);
 
-  &_hr {
-    margin: 4rem 0;
-    border: 1px solid var(--color-main);
+  @include breakpoints.xxl {
+    padding: var(--spacing-400) var(--spacing-1600);
   }
 
-  &_main {
+  @include breakpoints.lg {
+    padding: var(--spacing-400);
+  }
+
+  @include breakpoints.md {
+    padding: var(--spacing-200) var(--spacing-100);
+  }
+
+  &__separator {
+    border: 1px solid var(--neutral-200);
+    &.--colored {
+      border-color: var(--color-main);
+    }
+  }
+
+  &__main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    padding: var(--spacing-600) var(--spacing-400);
 
     &_title {
       font-size: 2rem;
@@ -68,7 +84,6 @@ svg.lucide {
     }
 
     &_head {
-      font-size: 0.8rem;
       color: var(--neutral-800);
       display: flex;
       flex-direction: column;
@@ -77,7 +92,7 @@ svg.lucide {
       &-number {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        gap: var(--spacing-200);
       }
     }
 
@@ -88,43 +103,39 @@ svg.lucide {
         display: inline-flex;
         flex-direction: row;
         align-items: flex-end;
-        gap: 1rem;
+        gap: var(--spacing-200);
       }
     }
   }
 
-  &_nav {
+  &__nav {
     font-size: 0.8rem;
 
     display: flex;
     flex-direction: row;
     text-transform: uppercase;
-    justify-content: space-between;
+    align-items: center;
 
-    &-items {
+    &__items {
       display: inline-flex;
       flex-direction: row;
       gap: 1rem;
-
-      &-link {
-        text-decoration: none;
-        color: var(--neutral-800);
-        transition: color 0.2s ease-in-out;
-
-        &:hover {
-          color: var(--color-main);
-          transition: color 0.2s ease-in-out;
-
-        }
-      }
     }
 
-    &-copyright {
-      font-size: 0.6rem;
-      color: var(--neutral-400);
-      float: right;
-      text-transform: initial;
-    }
+
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-150) 0;
+  }
+
+  &__copyright {
+    color: var(--neutral-400);
+    float: right;
+    text-transform: initial;
   }
 }
 </style>

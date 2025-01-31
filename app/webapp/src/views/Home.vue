@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import Navigation from "../components/Navigation.vue";
+ import EmployeeLayout from "@/layout/EmployeeLayout.vue";
 </script>
 
 <template>
-  <Navigation />
+  <EmployeeLayout>
+    <h1 class="--display">Salut</h1>
+  </EmployeeLayout>
 </template>
