@@ -3,6 +3,6 @@
 
     enum Types: string {
         case Client = 'type-client';
-        case Supplier= 'type-supplier';
+        case Supplier = 'type-supplier';
     }
 ?>
