@@ -18,13 +18,13 @@ router.options.routes.push(    {
     <div class="footer__main">
       <h3 class="footer__main_title">COGIP</h3>
       <div class="footer__main_head">
-        <div><MapPin /> 345 Faulconer Drive, Suite 4 • Charlottesville, CA, 12345</div>
-        <div class="footer__main_head-number">
+        <p><MapPin /> 345 Faulconer Drive, Suite 4 • Charlottesville, CA, 12345</p>
+        <p class="footer__main_head-number">
           <span><Phone />(123) 456-7890</span>
           <span><Printer />(123) 456-7890</span>
-        </div>
+        </p>
         <!-- missing icon form google+ and Pinterest will be removed form the footer after Front-team decision -->
-        <div class="footer_main_body footer_main_body-social"> Social Media <Facebook /> <Twitter /> <Linkedin />  <Instagram /> <Rss /></div>
+        <div class="footer_main_body-social"><Facebook /> <Twitter /> <Linkedin />  <Instagram /> <Rss /></div>
       </div>
     </div>
     <hr class="footer__separator"/>
@@ -42,7 +42,7 @@ router.options.routes.push(    {
 
 svg.lucide {
   color: var(--color-main);
-  width: 1.3rem;
+  height: 1.5rem;
   vertical-align: bottom;
   margin-right: 0.8rem;
 }
@@ -59,7 +59,7 @@ svg.lucide {
   }
 
   @include breakpoints.md {
-    padding: var(--spacing-200) var(--spacing-100);
+    padding: var(--spacing-200);
   }
 
   &__separator {
@@ -76,6 +76,12 @@ svg.lucide {
     align-items: flex-start;
     padding: var(--spacing-600) var(--spacing-400);
 
+    @include breakpoints.md {
+      flex-direction: column;
+      gap: var(--spacing-400);
+      padding: var(--spacing-400) var(--spacing-200);
+    }
+
     &_title {
       font-size: 2rem;
       font-weight: 700;
@@ -87,12 +93,17 @@ svg.lucide {
       color: var(--neutral-800);
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: var(--spacing-150);
 
       &-number {
         display: flex;
         flex-direction: row;
-        gap: var(--spacing-200);
+        justify-content: space-between;
+
+        @include breakpoints.md {
+          flex-direction: column;
+          gap: var(--spacing-200);
+        }
       }
     }
 
@@ -103,7 +114,7 @@ svg.lucide {
         display: inline-flex;
         flex-direction: row;
         align-items: flex-end;
-        gap: var(--spacing-200);
+        gap: var(--spacing-400);
       }
     }
   }
@@ -122,7 +133,10 @@ svg.lucide {
       gap: 1rem;
     }
 
-
+    @include breakpoints.md {
+      text-align: center;
+      flex-direction: column;
+    }
   }
 
   &__bottom {
@@ -130,6 +144,11 @@ svg.lucide {
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-150) 0;
+
+    @include breakpoints.md {
+      flex-direction: column;
+      gap: var(--spacing-200);
+    }
   }
 
   &__copyright {

@@ -26,11 +26,8 @@ import Footer from "@/components/Employee/Footer.vue";
   }
 
   @include breakpoints.md {
-    padding: var(--spacing-200) var(--spacing-100);
+    padding: var(--spacing-200);
   }
 
-  @include breakpoints.sm {
-    padding: var(--spacing-100);
-  }
 }
 </style>
