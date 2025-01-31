@@ -1,22 +1,38 @@
 <?php
-/*
-namespace App\DataFixtures;
+    namespace App\DataFixtures;
 
-use App\Entity\Company;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
+    use App\DataFixtures\enumerations\Types;
+    use App\Entity\Company;
+    use App\Entity\Type;
+    use DateTime;
+    use Doctrine\Bundle\FixturesBundle\Fixture;
+    use Doctrine\Persistence\ObjectManager;
+    use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class CompanyFixtures extends Fixture
-{
-    public function load(ObjectManager $manager): void
+    class CompanyFixtures extends Fixture implements DependentFixtureInterface
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        for ($i=0; $i < 10 ; $i++) { 
-            $company = new Company();
+        public function load(ObjectManager $manager): void
+        {
+            $now = new DateTime("now");
 
+            for ($i=1; $i <= 10 ; $i++) { 
+                $typeReference = Types::cases()[array_rand(Types::cases())]->value;
+                $company = new Company();
+                $company->setName('company'.$i);
+                $company->setTypeId($this->getReference($typeReference, Type::class));
+                $company->setCountry('Belgique');
+                $company->setTVA('21');
+                $company->setCreatedAt($now);
+                $company->setUpdatedAt($now);
+                $manager->persist($company);
+            }
+
+            $manager->flush();
         }
-        $manager->flush();
+
+        public function getDependencies(): array
+        {
+            return [TypeFixtures::class];
+        }
     }
-}
-*/
+?>
