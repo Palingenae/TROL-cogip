@@ -21,8 +21,9 @@
                 $invoice = new Invoice();
                 $invoice->setRef($faker->numerify("F".$now->format("Ymd")."-###"));
                 $invoice->setCompany($this->getReference("company-".$typeReference, Company::class));
-                $invoice->setCreatedAt($now);
-                $invoice->setUpdatedAt($now);
+                $firstDate = $faker->dateTimeBetween('-2 year','now');
+                $invoice->setCreatedAt($firstDate);
+                $invoice->setUpdatedAt($faker->dateTimeBetween($firstDate,'now'));
                 $manager->persist($invoice);
             }
 

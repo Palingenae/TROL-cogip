@@ -14,7 +14,7 @@
     {
         public function load(ObjectManager $manager): void
         {
-            $now = new DateTime("now");
+            //$now = new DateTime("now");
             $faker = Factory::create();
             for ($i=1; $i <= 10 ; $i++) { 
                 $typeReference = rand(1,10);
@@ -25,8 +25,9 @@
                 $contact->setEmail(strtolower($fname.".".$lname."@".$faker->freeEmailDomain()));
                 $contact->setPhone($faker->numerify("071######"));
                 $contact->setCompany($this->getReference("company-".$typeReference, Company::class));
-                $contact->setCreatedAt($now);
-                $contact->setUpdatedAt($now);
+                $firstDate = $faker->dateTimeBetween('-2 year','now');
+                $contact->setCreatedAt($firstDate);
+                $contact->setUpdatedAt($faker->dateTimeBetween($firstDate,'now'));
                 $manager->persist($contact);
             }
 

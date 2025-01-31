@@ -22,8 +22,9 @@
                 $company->setTypeId($this->getReference($typeReference, Type::class));
                 $company->setCountry('Belgique');
                 $company->setTVA($faker->numerify("BE##########"));
-                $company->setCreatedAt($now);
-                $company->setUpdatedAt($now);
+                $firstDate = $faker->dateTimeThisDecade();
+                $company->setCreatedAt($firstDate);
+                $company->setUpdatedAt($faker->dateTimeBetween($firstDate,'now'));
                 $manager->persist($company);
                 $this->addReference("company-".$i,$company);
             }
