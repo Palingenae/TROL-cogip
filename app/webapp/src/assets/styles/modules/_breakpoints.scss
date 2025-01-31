@@ -1,0 +1,35 @@
+$screen-size-xxl: 160rem;
+$screen-size-xl: 120rem;
+$screen-size-lg: 90rem;
+$screen-size-md: 64rem;
+$screen-size-sm: 48rem;
+
+@mixin xxl {
+  @media screen and (min-width: #{$screen-size-xl}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media screen and (max-width: #{$screen-size-xl}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media screen and (max-width: #{$screen-size-lg}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (max-width: #{$screen-size-md}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (max-width: #{$screen-size-sm}) {
+    @content;
+  }
+}

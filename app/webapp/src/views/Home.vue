@@ -1,9 +1,7 @@
 <script setup lang="ts">
-
+import Navigation from "../components/Navigation.vue";
 </script>
 
 <template>
-  <section>
-    <h1 class="--display">Manage your customers and your invoices easily</h1>
-  </section>
+  <Navigation />
 </template>
